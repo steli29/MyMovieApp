@@ -1,0 +1,1 @@
+export { MovieRow as default } from './MovieRow'

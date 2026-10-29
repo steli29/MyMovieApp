@@ -1,0 +1,1 @@
+export { FeaturedMovie as default } from './FeaturedMovie'
