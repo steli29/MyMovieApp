@@ -1,10 +1,9 @@
-import type { Movie } from "../../types/movie";
-import type { MovieCardVariants } from "../../utils/constants";
-import type { OnMoviePressType } from "../MovieRow/types";
+import type { Movie } from '../../types/movie';
+import type { MovieCardVariants } from '../../utils/constants';
 
 export type MovieCardPropsType = {
   movie: Movie;
-  onPress: OnMoviePressType
-  variant?: MovieCardVariants
+  onPress: (movie: Movie) => void;
+  variant?: MovieCardVariants;
   onPosterError?: (imdbID: string) => void;
 };

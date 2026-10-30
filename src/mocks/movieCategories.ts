@@ -1,4 +1,3 @@
-
 export const CATEGORY_QUERIES = [
   {
     id: 'sci-fi',
@@ -56,7 +55,6 @@ export const CATEGORY_QUERIES = [
   },
 ] as const;
 
-
 export const CATEGORIES = [
   'Movies',
   'Series',
@@ -65,4 +63,4 @@ export const CATEGORIES = [
   'Comedy',
   'Sci-Fi',
   'Horror',
-] as const
+] as const;

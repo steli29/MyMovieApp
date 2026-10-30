@@ -3,10 +3,7 @@ import { useEffect, useState } from 'react';
 import { getMovieDetails } from '../services/omdbApi';
 import type { MovieDetails } from '../types/movie';
 
-export const useEpisodeDetails = (
-  imdbID: string,
-  isExpanded: boolean,
-) => {
+export const useEpisodeDetails = (imdbID: string, isExpanded: boolean) => {
   const [details, setDetails] = useState<MovieDetails | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

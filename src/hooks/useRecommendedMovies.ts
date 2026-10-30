@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 import { getMovieDetails } from '../services/omdbApi';
@@ -17,16 +16,18 @@ export const useRecommendedMovies = (currentImdbID: string) => {
       setIsLoading(true);
 
       const results = await Promise.allSettled(
-        RECOMMENDED_MOVIE_IDS
-          .filter(imdbID => imdbID !== currentImdbID)
-          .map(imdbID => getMovieDetails(imdbID)),
+        RECOMMENDED_MOVIE_IDS.filter(imdbID => imdbID !== currentImdbID).map(
+          imdbID => getMovieDetails(imdbID),
+        ),
       );
 
       if (!isActive) return;
 
       const recommendedMovies = results
         .filter(
-          (result): result is PromiseFulfilledResult<
+          (
+            result,
+          ): result is PromiseFulfilledResult<
             Awaited<ReturnType<typeof getMovieDetails>>
           > => result.status === 'fulfilled',
         )

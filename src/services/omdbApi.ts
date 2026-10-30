@@ -1,17 +1,10 @@
-
-import type {
-  Movie,
-  MovieDetails,
-  MovieSearchResponse,
-} from '../types/movie';
+import type { Movie, MovieDetails, MovieSearchResponse } from '../types/movie';
 import type { SeasonDetails } from '../types/series';
 
 const API_URL = 'https://www.omdbapi.com/';
 const API_KEY = 'd7afa2d9';
 
-const fetchFromOmdb = async <T>(
-  params: Record<string, string>,
-): Promise<T> => {
+const fetchFromOmdb = async <T>(params: Record<string, string>): Promise<T> => {
   const query = new URLSearchParams({
     apikey: API_KEY,
     ...params,

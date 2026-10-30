@@ -1,9 +1,5 @@
 import { useState, type FC } from 'react';
-import {
-  FlatList,
-  Pressable,
-  Text,
-} from 'react-native';
+import { FlatList, Pressable, Text } from 'react-native';
 import { styles } from './styles';
 import { CATEGORIES } from '../../../../mocks/movieCategories';
 
@@ -24,10 +20,7 @@ export const CategoryList: FC = () => {
 
         return (
           <Pressable
-            style={[
-              styles.category,
-              isSelected && styles.selectedCategory,
-            ]}
+            style={[styles.category, isSelected && styles.selectedCategory]}
             onPress={() => setSelectedCategory(item)}
           >
             <Text

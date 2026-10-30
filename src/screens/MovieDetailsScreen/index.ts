@@ -1,1 +1,1 @@
-export { MovieDetailsScreen as default } from './MovieDetailsScreen'
+export { MovieDetailsScreen as default } from './MovieDetailsScreen';

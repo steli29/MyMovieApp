@@ -1,12 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { getSeasonEpisodes } from '../services/omdbApi';
 import type { Episode } from '../types/series';
 
-export const useSeasonEpisodes = (
-  imdbID: string,
-  season: number,
-) => {
+export const useSeasonEpisodes = (imdbID: string, season: number) => {
   const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -29,9 +25,7 @@ export const useSeasonEpisodes = (
         if (!isActive) return;
 
         setError(
-          err instanceof Error
-            ? err.message
-            : 'Failed to load episodes',
+          err instanceof Error ? err.message : 'Failed to load episodes',
         );
       } finally {
         if (isActive) {

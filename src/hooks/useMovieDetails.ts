@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 import { getMovieDetails } from '../services/omdbApi';
@@ -26,9 +25,7 @@ export const useMovieDetails = (imdbID: string) => {
       } catch (err) {
         if (isActive) {
           setError(
-            err instanceof Error
-              ? err.message
-              : 'Failed to load movie details',
+            err instanceof Error ? err.message : 'Failed to load movie details',
           );
         }
       } finally {

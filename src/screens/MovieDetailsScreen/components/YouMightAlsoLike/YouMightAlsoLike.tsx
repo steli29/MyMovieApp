@@ -24,10 +24,5 @@ export const YouMightAlsoLike: FC<YouMightAlsoLikePropsType> = ({
     movies,
   };
 
-  return (
-    <MovieRow
-      category={category}
-      onMoviePress={onMoviePress}
-    />
-  );
+  return <MovieRow category={category} onMoviePress={onMoviePress} />;
 };

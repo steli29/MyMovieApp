@@ -1,1 +1,1 @@
-export { AppHeaderBack as default } from './AppHeaderBack'
+export { AppHeaderBack as default } from './AppHeaderBack';

@@ -5,6 +5,7 @@ import type { MovieDetailsHeroPropsType } from './types';
 import { styles } from './styles';
 import AppHeaderBack from '../../../../components/AppHeaderBack';
 import { Play } from 'lucide-react-native';
+import { EMPTY_VALUE } from '../../../../utils/constants';
 
 export const MovieDetailsHero: FC<MovieDetailsHeroPropsType> = ({
   movie,
@@ -12,7 +13,7 @@ export const MovieDetailsHero: FC<MovieDetailsHeroPropsType> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {movie.Poster !== 'N/A' && (
+      {movie.Poster !== EMPTY_VALUE && (
         <Image
           source={{ uri: movie.Poster }}
           style={styles.poster}

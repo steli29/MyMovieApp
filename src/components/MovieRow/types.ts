@@ -1,8 +1,6 @@
-import type { Movie, MovieCategory } from "../../types/movie";
-
-export type OnMoviePressType = (movie: Movie) => void;
+import type { Movie, MovieCategory } from '../../types/movie';
 
 export type MovieRowPropsType = {
   category: MovieCategory;
-  onMoviePress: OnMoviePressType
+  onMoviePress: (movie: Movie) => void;
 };

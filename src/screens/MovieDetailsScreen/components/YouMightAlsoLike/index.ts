@@ -1,1 +1,1 @@
-export { YouMightAlsoLike as defailt} from './YouMightAlsoLike'
+export { YouMightAlsoLike as defailt } from './YouMightAlsoLike';
