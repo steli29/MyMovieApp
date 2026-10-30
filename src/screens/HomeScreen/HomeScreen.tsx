@@ -1,5 +1,11 @@
 import { useMemo, useState, type FC } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 import type { HomeScreenPropsType } from './types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMovieCategories } from '../../hooks/useMovieCategories';
@@ -12,7 +18,8 @@ import { ScreenNames } from '../../utils/constants';
 
 export const HomeScreen: FC<HomeScreenPropsType> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
-  const { categories, isLoading, error } = useMovieCategories();
+  const { categories, refetchCategories, isLoading, error } =
+    useMovieCategories();
   const [refreshing, setRefreshing] = useState(false);
 
   const featuredMovie = useMemo(
@@ -28,7 +35,11 @@ export const HomeScreen: FC<HomeScreenPropsType> = ({ navigation }) => {
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    setRefreshing(false);
+    try {
+      await refetchCategories();
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   if (isLoading) {
@@ -71,8 +82,15 @@ export const HomeScreen: FC<HomeScreenPropsType> = ({ navigation }) => {
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            tintColor="#E50914"
+            colors={['#E50914']}
+            progressBackgroundColor="#141414"
+          />
+        }
       />
     </View>
   );

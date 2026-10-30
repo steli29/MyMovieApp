@@ -6,6 +6,7 @@ import { useEpisodeDetails } from '../../hooks/useEpisodeDetails';
 import { EMPTY_VALUE } from '../../utils/constants';
 import type { EpisodeCardPropsType } from './types';
 import { styles } from './styles';
+import { formatDate } from '../../utils/dateUtils';
 
 export const EpisodeCard: FC<EpisodeCardPropsType> = ({
   episode,
@@ -30,7 +31,9 @@ export const EpisodeCard: FC<EpisodeCardPropsType> = ({
 
           <View style={styles.metadata}>
             {hasReleaseDate && (
-              <Text style={styles.releaseDate}>{episode.Released}</Text>
+              <Text style={styles.releaseDate}>
+                {formatDate(episode.Released)}
+              </Text>
             )}
 
             {hasRating && (

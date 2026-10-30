@@ -18,6 +18,7 @@ import { formatMovieRuntime } from '../../utils/formatMovieRuntime';
 import type { Movie } from '../../types/movie';
 import { YouMightAlsoLike } from './components/YouMightAlsoLike/YouMightAlsoLike';
 import Episodes from './components/Episodes';
+import DetailsLabel from './components/DetailsLabel';
 
 export const MovieDetailsScreen: FC<MovieDetailsScreenPropsType> = ({
   navigation,
@@ -69,10 +70,7 @@ export const MovieDetailsScreen: FC<MovieDetailsScreenPropsType> = ({
 
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[
-          styles.content,
-          { paddingBottom: insets.bottom + 24 },
-        ]}
+        contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.information}>
@@ -111,40 +109,11 @@ export const MovieDetailsScreen: FC<MovieDetailsScreenPropsType> = ({
               </Pressable>
             </View>
           )}
-
-          {movie.Actors !== EMPTY_VALUE && (
-            <Text style={styles.details}>
-              <Text style={styles.label}>Cast: </Text>
-              {movie.Actors}
-            </Text>
-          )}
-
-          {movie.Director !== EMPTY_VALUE && (
-            <Text style={styles.details}>
-              <Text style={styles.label}>Director: </Text>
-              {movie.Director}
-            </Text>
-          )}
-
-          {movie.Genre !== EMPTY_VALUE && (
-            <Text style={styles.details}>
-              <Text style={styles.label}>Genres: </Text>
-              {movie.Genre}
-            </Text>
-          )}
-          {movie.Country && movie.Country !== EMPTY_VALUE && (
-            <Text style={styles.details}>
-              <Text style={styles.label}>Country: </Text>
-              {movie.Country}
-            </Text>
-          )}
-
-          {movie.Language && movie.Language !== EMPTY_VALUE && (
-            <Text style={styles.details}>
-              <Text style={styles.label}>Language: </Text>
-              {movie.Language}
-            </Text>
-          )}
+          <DetailsLabel label="Cast" value={movie.Actors} />
+          <DetailsLabel label="Director" value={movie.Director} />
+          <DetailsLabel label="Genres" value={movie.Genre} />
+          <DetailsLabel label="Country" value={movie.Country} />
+          <DetailsLabel label="Language" value={movie.Language} />
         </View>
         {movie.Type === 'series' && Number(movie.totalSeasons) > 0 && (
           <Episodes

@@ -1,12 +1,5 @@
 import { useMemo, useState, type FC } from 'react';
-import {
-  ActivityIndicator,
-  Modal,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { ChevronDown } from 'lucide-react-native';
 
 import type { EpisodesPropsType } from './types';
@@ -14,6 +7,7 @@ import { styles } from './styles';
 import { useSeasonEpisodes } from '../../../../hooks/useSeasonEpisodes';
 import EpisodeCard from '../../../../components/EpisodeCard';
 import type { Episode } from '../../../../types/series';
+import SeasonPickerModal from './components/SeasonPickerModal';
 
 export const Episodes: FC<EpisodesPropsType> = ({ imdbID, totalSeasons }) => {
   const [selectedSeason, setSelectedSeason] = useState(1);
@@ -46,9 +40,15 @@ export const Episodes: FC<EpisodesPropsType> = ({ imdbID, totalSeasons }) => {
 
   return (
     <View style={styles.container}>
+      <SeasonPickerModal
+        visible={isSeasonPickerVisible}
+        seasons={seasons}
+        selectedSeason={selectedSeason}
+        onSelectSeason={handleSeasonPress}
+        onClose={() => setIsSeasonPickerVisible(false)}
+      />
       <View style={styles.header}>
         <Text style={styles.title}>Episodes</Text>
-
         <Pressable
           style={styles.seasonButton}
           onPress={() => setIsSeasonPickerVisible(true)}
@@ -57,7 +57,6 @@ export const Episodes: FC<EpisodesPropsType> = ({ imdbID, totalSeasons }) => {
           <ChevronDown size={18} color="#FFFFFF" />
         </Pressable>
       </View>
-
       {isLoading ? (
         <ActivityIndicator color="#E50914" style={styles.loader} />
       ) : error ? (
@@ -74,45 +73,6 @@ export const Episodes: FC<EpisodesPropsType> = ({ imdbID, totalSeasons }) => {
           ))}
         </View>
       )}
-
-      <Modal
-        visible={isSeasonPickerVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setIsSeasonPickerVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Select Season</Text>
-
-            <ScrollView>
-              {seasons.map(season => (
-                <Pressable
-                  key={season}
-                  style={styles.modalSeason}
-                  onPress={() => handleSeasonPress(season)}
-                >
-                  <Text
-                    style={[
-                      styles.modalSeasonText,
-                      season === selectedSeason && styles.selectedSeasonText,
-                    ]}
-                  >
-                    Season {season}
-                  </Text>
-                </Pressable>
-              ))}
-            </ScrollView>
-
-            <Pressable
-              style={styles.modalCancel}
-              onPress={() => setIsSeasonPickerVisible(false)}
-            >
-              <Text style={styles.modalCancelText}>Cancel</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };

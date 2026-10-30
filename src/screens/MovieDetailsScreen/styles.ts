@@ -8,9 +8,6 @@ export const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-  content: {
-    paddingBottom: 24,
-  },
   centered: {
     flex: 1,
     justifyContent: 'center',
@@ -67,14 +64,5 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
     marginTop: 8,
-  },
-  details: {
-    color: '#CCCCCC',
-    fontSize: 13,
-    lineHeight: 20,
-    marginBottom: 8,
-  },
-  label: {
-    color: '#888888',
   },
 });
