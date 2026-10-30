@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { useMemo, useState, type FC } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import type { HomeScreenPropsType } from './types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -15,7 +15,10 @@ export const HomeScreen: FC<HomeScreenPropsType> = ({ navigation }) => {
   const { categories, isLoading, error } = useMovieCategories();
   const [refreshing, setRefreshing] = useState(false);
 
-  const featuredMovie = categories.flatMap(category => category.movies)[0];
+  const featuredMovie = useMemo(
+    () => categories.flatMap(category => category.movies)[0],
+    [categories],
+  );
 
   const handleMoviePress = (movie: Movie) => {
     navigation.navigate(ScreenNames.MovieDetails, {

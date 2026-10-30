@@ -18,7 +18,6 @@ export const EpisodeCard: FC<EpisodeCardPropsType> = ({
   );
 
   const hasReleaseDate = episode.Released && episode.Released !== EMPTY_VALUE;
-
   const hasRating = episode.imdbRating && episode.imdbRating !== EMPTY_VALUE;
 
   return (

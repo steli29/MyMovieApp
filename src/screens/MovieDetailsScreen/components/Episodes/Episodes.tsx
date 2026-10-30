@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { useMemo, useState, type FC } from 'react';
 import {
   ActivityIndicator,
   Modal,
@@ -27,12 +27,21 @@ export const Episodes: FC<EpisodesPropsType> = ({ imdbID, totalSeasons }) => {
     selectedSeason,
   );
 
-  const seasons = Array.from({ length: totalSeasons }, (_, index) => index + 1);
+  const seasons = useMemo(
+    () => Array.from({ length: totalSeasons }, (_, index) => index + 1),
+    [totalSeasons],
+  );
 
   const handleEpisodePress = (episode: Episode) => {
     setSelectedEpisodeID(current =>
       current === episode.imdbID ? null : episode.imdbID,
     );
+  };
+
+  const handleSeasonPress = (season: number) => {
+    setSelectedSeason(season);
+    setSelectedEpisodeID(null);
+    setIsSeasonPickerVisible(false);
   };
 
   return (
@@ -81,11 +90,7 @@ export const Episodes: FC<EpisodesPropsType> = ({ imdbID, totalSeasons }) => {
                 <Pressable
                   key={season}
                   style={styles.modalSeason}
-                  onPress={() => {
-                    setSelectedSeason(season);
-                    setSelectedEpisodeID(null);
-                    setIsSeasonPickerVisible(false);
-                  }}
+                  onPress={() => handleSeasonPress(season)}
                 >
                   <Text
                     style={[

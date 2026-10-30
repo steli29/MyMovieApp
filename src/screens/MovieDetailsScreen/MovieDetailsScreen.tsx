@@ -25,9 +25,8 @@ export const MovieDetailsScreen: FC<MovieDetailsScreenPropsType> = ({
 }) => {
   const { imdbID } = route.params;
   const { movie, isLoading, error } = useMovieDetails(imdbID);
-
-  const insets = useSafeAreaInsets();
   const [isPlotExpanded, setIsPlotExpanded] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const onBackPressHandler = useCallback(() => {
     navigation.goBack();
@@ -63,6 +62,7 @@ export const MovieDetailsScreen: FC<MovieDetailsScreenPropsType> = ({
     movie.Rated,
     movie.Runtime !== EMPTY_VALUE ? formatMovieRuntime(movie.Runtime) : null,
   ].filter(value => value && value !== EMPTY_VALUE);
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <MovieDetailsHero movie={movie} onBackPress={onBackPressHandler} />
