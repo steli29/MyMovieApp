@@ -51,10 +51,16 @@ export type MovieDetails = {
   Episode?: string;
 };
 
+export enum MovieCategoryType {
+  Top10 = 'top10',
+  Recent = 'recent',
+  Standard = 'standard',
+}
+
 export type MovieCategory = {
   id: string;
   title: string;
+  type: MovieCategoryType;
   movies: Movie[];
 };
-
 export type MovieType = 'movie' | 'series' | 'episode';

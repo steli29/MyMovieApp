@@ -6,4 +6,5 @@ export type MovieCardPropsType = {
   onPress: (movie: Movie) => void;
   variant?: MovieCardVariants;
   onPosterError?: (imdbID: string) => void;
+  rank?: number;
 };

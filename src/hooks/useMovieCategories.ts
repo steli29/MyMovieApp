@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { searchMovies } from '../services/omdbApi';
-import type { MovieCategory } from '../types/movie';
+import { getMovieDetails } from '../services/omdbApi';
+import { MOVIE_CATEGORIES } from '../mocks/movieCategories';
+import type { MovieCategory, MovieDetails } from '../types/movie';
 import { EMPTY_VALUE } from '../utils/constants';
-import { CATEGORY_QUERIES } from '../mocks/movieCategories';
 
 export const useMovieCategories = () => {
   const [categories, setCategories] = useState<MovieCategory[]>([]);
@@ -12,15 +12,25 @@ export const useMovieCategories = () => {
 
   const refetchCategories = useCallback(async () => {
     setError(null);
+
     const results = await Promise.allSettled(
-      CATEGORY_QUERIES.map(async (category): Promise<MovieCategory> => {
-        const movies = (
-          await searchMovies(category.query, category.type)
-        ).filter(movie => movie.Poster && movie.Poster !== EMPTY_VALUE);
+      MOVIE_CATEGORIES.map(async (category): Promise<MovieCategory> => {
+        const movieResults = await Promise.allSettled(
+          category.imdbIDs.map(imdbID => getMovieDetails(imdbID)),
+        );
+
+        const movies = movieResults
+          .filter(
+            (result): result is PromiseFulfilledResult<MovieDetails> =>
+              result.status === 'fulfilled',
+          )
+          .map(result => result.value)
+          .filter(movie => movie.Poster && movie.Poster !== EMPTY_VALUE);
 
         return {
           id: category.id,
           title: category.title,
+          type: category.type,
           movies,
         };
       }),

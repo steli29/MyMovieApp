@@ -1,4 +1,4 @@
-import { Image, Pressable } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
 
 import type { FC } from 'react';
 import type { MovieCardPropsType } from './types';
@@ -10,6 +10,7 @@ export const MovieCard: FC<MovieCardPropsType> = ({
   onPress,
   variant = MovieCardVariants.default,
   onPosterError,
+  rank,
 }) => {
   const isFeatured = variant === MovieCardVariants.featured;
 
@@ -18,6 +19,11 @@ export const MovieCard: FC<MovieCardPropsType> = ({
       style={[styles.container, isFeatured && styles.featuredContainer]}
       onPress={() => onPress(movie)}
     >
+      {rank !== undefined && (
+        <View style={styles.rankBadge}>
+          <Text style={styles.rankText}>{rank}</Text>
+        </View>
+      )}
       <Image
         source={{ uri: movie.Poster }}
         style={[styles.poster, isFeatured && styles.featuredPoster]}

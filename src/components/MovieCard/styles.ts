@@ -20,4 +20,19 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#252525',
   },
+  rankBadge: {
+    position: 'absolute',
+    backgroundColor: '#E50914',
+    minWidth: 30,
+    height: 30,
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1,
+  },
+  rankText: {
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '800',
+  },
 });
